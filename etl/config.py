@@ -1,14 +1,8 @@
 """Paths, dataset specs, and reference tables shared across the pipeline.
 
-The project ingests two ANM/RAL datasets that share a lot of shape (same
-UF/Classe/Substância dimensions, same "Ano base" grain) but differ in one
-structural way that matters for how they're aggregated: Produção Bruta
-reports every quantity in tonnes (implicit, baked into the column name),
-while Produção Beneficiada reports each quantity in whatever unit the
-product is actually sold in (t / kg / ct — a `Unidade de Medida - *` column
-per quantity). `DatasetSpec.quantities_uniform_unit` records that
-difference once, here, so Silver knows which quantity columns are safe to
-sum across rows and which are not (see the comment in `silver.py`).
+Bruta and Beneficiada share the same dimensions (UF, Classe, Substância,
+Ano base) but Beneficiada's quantities aren't in a uniform unit — see
+`DatasetSpec.quantities_uniform_unit` and silver.py.
 """
 
 from dataclasses import dataclass, field
@@ -91,10 +85,8 @@ class DatasetSpec:
     # implicitly tonnes (Beneficiada); empty tuple for Bruta.
     unit_columns: tuple = ()
 
-    # True only when every physical-quantity column in this dataset is in
-    # the same unit (tonnes) for every row, so summing them across rows is
-    # numerically meaningful. False means: aggregate by R$ (unit-agnostic),
-    # never by raw quantity, unless grouped by matching unit first.
+    # True: quantities are all tonnes, safe to sum. False: units vary per
+    # row (Beneficiada) — aggregate by R$ instead.
     quantities_uniform_unit: bool = True
 
     raw_columns: tuple = field(default_factory=tuple)
@@ -197,8 +189,7 @@ BENEFICIADA = DatasetSpec(
 
 DATASETS = {"bruta": BRUTA, "beneficiada": BENEFICIADA}
 
-# Backward-compatible module-level aliases (kept so scripts that only ever
-# cared about the Bruta column names don't need a spec threaded through).
+# module-level aliases for scripts that only need Bruta's column names
 COL_ANO = BRUTA.col_ano
 COL_UF = BRUTA.col_uf
 COL_CLASSE = BRUTA.col_classe

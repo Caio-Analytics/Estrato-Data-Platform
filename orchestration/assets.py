@@ -1,13 +1,10 @@
-"""Software-defined assets wrapping the Bateia ETL pipeline (bronze -> silver
--> gold -> cross-reference -> dashboard).
+"""Dagster assets wrapping the Bateia pipeline: bronze -> silver -> gold ->
+cross-reference -> dashboard.
 
-The transform logic itself lives in `etl/` and `dashboard/` — untouched,
-copied over from the original Bateia project. This module's only job is to
-declare the dependency graph, so Dagster can schedule it, retry failed
-steps, and show lineage in the UI. Each asset stays a thin call into the
-existing file-based pipeline (every stage reads/writes parquet via paths in
-`etl.config`); the value Dagster adds is orchestration, not re-implementing
-the transforms in-memory.
+Transform logic lives in etl/ and dashboard/, unchanged from Bateia. Each
+asset here is a thin call into that file-based pipeline (parquet in,
+parquet out via etl.config paths) — Dagster just adds dependencies,
+retries, and lineage on top.
 """
 
 import dagster as dg
@@ -92,9 +89,8 @@ def cross_reference_asset() -> dg.MaterializeResult:
 
 @dg.asset_check(asset=cross_reference_asset)
 def cross_reference_has_comparable_substances() -> dg.AssetCheckResult:
-    """Guards against the join silently degenerating to zero overlap between
-    Produção Bruta and Produção Beneficiada (e.g. a substance-name mismatch
-    introduced upstream)."""
+    """Fails if the join finds zero comparable substances (e.g. a
+    substance-name mismatch upstream)."""
     from etl.config import GOLD_DIR
 
     resumo_path = GOLD_DIR / "cruzamento" / "resumo.json"

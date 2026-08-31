@@ -1,10 +1,8 @@
 """Dagster entry point: `dagster dev -m orchestration.definitions`.
 
-Defines one job that materializes the whole asset graph and a daily
-schedule for it — the ANM/RAL source files are refreshed by the
-government on an annual cadence, but daily is a deliberately conservative
-default that's easy to demo in the UI (`dagster dev` shows the next tick
-without waiting a year for it to matter).
+One job materializes the whole graph. Schedule is daily and stopped by
+default — ANM/RAL data only refreshes yearly, but daily keeps the next
+tick visible in the UI without waiting a year.
 """
 
 import dagster as dg

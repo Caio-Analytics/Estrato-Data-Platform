@@ -1,16 +1,8 @@
-"""Gold layer: analysis-ready aggregates for the dashboard, built with pandas.
+"""Gold layer: analysis-ready aggregates for the dashboard (pandas).
 
-Bronze/Silver use Polars for throughput on the row-level clean. Gold
-switches to pandas deliberately: this stage is exploratory aggregation —
-pivot_table, groupby-transform for within-group shares, and pct_change for
-growth rates — the corner of the ecosystem pandas still covers most tersely.
-
-Generic over `DatasetSpec`. The one place the two datasets genuinely diverge
-is `destino_mix`: Bruta's quantities are uniformly tonnes, so a % share of
-*quantity* is meaningful; Beneficiada's quantities mix t/kg/ct row to row
-(see silver.py), so its destination mix is expressed as a % share of *value*
-(R$) instead — still answers "where does output go", without silently
-summing incompatible units.
+destino_mix is where Bruta and Beneficiada diverge: Bruta's share is by
+quantity (uniform tonnes), Beneficiada's is by R$ since its quantities mix
+units row to row (see silver.py).
 """
 
 import json

@@ -1,8 +1,6 @@
-"""Sanity checks for the pipeline. Not exhaustive — enough to catch a
-schema drift in a future daily refresh of either source file, or a
-regression in the decimal-parsing / null-handling logic documented in
-etl/silver.py. Bronze/Silver/Gold tests are parametrized over both dataset
-specs so the same assertions guard Produção Bruta and Produção Beneficiada.
+"""Sanity checks for the pipeline: schema drift, and regressions in
+silver.py's decimal/null handling. Bronze/Silver/Gold tests are
+parametrized over both dataset specs.
 """
 
 import polars as pl
@@ -148,10 +146,8 @@ class TestGold:
 class TestCrossReference:
     @pytest.fixture(scope="class")
     def cruzamento(self, tmp_path_factory):
-        # Independent of the parametrized `spec`/`silver_df` fixtures above —
-        # this needs both datasets' Silver output at once, built fresh into
-        # their own temp dirs so the test never depends on data/silver/
-        # already existing on disk (e.g. a clean CI checkout).
+        # needs both datasets' Silver output at once, built fresh so this
+        # doesn't depend on data/silver/ already existing on disk
         bruta_dir = tmp_path_factory.mktemp("cruz_bruta")
         ben_dir = tmp_path_factory.mktemp("cruz_ben")
         bruta_spec = _patched(BRUTA, bruta_dir)

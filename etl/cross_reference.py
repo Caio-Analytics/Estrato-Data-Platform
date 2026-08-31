@@ -1,21 +1,12 @@
 """Cross-references Produção Bruta and Produção Beneficiada via SQL (DuckDB).
 
-This is the one place in the pipeline where a real multi-table join earns
-its keep, so it's written as SQL against the two Silver parquet files
-directly rather than as another pandas/Polars join — DuckDB reads Parquet
-natively and is genuinely the most direct tool for "aggregate two tables on
-a shared key and compare them."
+Joins on Substância Mineral only, not (ano, UF, substância): raw and
+processed output for the same substance aren't necessarily reported from
+the same mine in the same year, so joining at row grain would drop volume.
+Compares R$ values, not quantity, since Beneficiada's units aren't uniform
+(see silver.py).
 
-The join key is `Substância Mineral` (aggregated first, then joined) rather
-than the full (ano, UF, substância) grain: raw and processed output for the
-same substance don't necessarily get reported from the same mine in the
-same year, so joining at row grain would silently drop real volume. Value
-(R$) is used, not physical quantity — Beneficiada's quantities aren't in a
-uniform unit (see silver.py), so R$ is the only metric safe to compare
-across the two tables.
-
-Output feeds the dashboard's "Beneficiamento" section: how much value
-processing adds over selling ore raw, per substance and per year.
+Feeds the dashboard's "Beneficiamento" section.
 """
 
 import json

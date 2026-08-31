@@ -1,21 +1,11 @@
 """Silver layer: type, clean, and validate a Bronze table.
 
-Generic over `DatasetSpec`, but one structural difference between the two
-datasets changes what's safe to compute:
-
-* **Produção Bruta** reports every quantity in tonnes — the unit is baked
-  into the column name ("... (t)"). Summing `Qtd_Venda + Qtd_Transformação +
-  Qtd_Transferência` across rows is numerically meaningful.
-* **Produção Beneficiada** reports each quantity in whatever unit the
-  product actually sells in — t, kg, or ct, varying row to row (a diamond's
-  `ct` next to bauxite's `t`). Summing raw quantities across rows here would
-  silently add tonnes to carats. So for this dataset the pipeline only
-  aggregates the R$ columns (currency is unit-agnostic) and leaves the
-  quantity columns as per-row facts, not summable metrics.
-
-`spec.quantities_uniform_unit` is the switch: see its use below and in
-`gold.py` / the dashboard, which only ever chart Beneficiada quantities
-grouped by their own unit, never summed across units.
+Bruta reports quantities in tonnes only (unit's baked into the column
+name), so summing them across rows is fine. Beneficiada's quantities are in
+whatever unit the product sells in — t, kg, ct, varying row to row — so
+summing would mix carats and tonnes; only its R$ columns get aggregated.
+`spec.quantities_uniform_unit` flags which case applies; gold.py and the
+dashboard follow the same rule.
 """
 
 import logging

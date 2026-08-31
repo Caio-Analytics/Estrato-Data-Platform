@@ -1,10 +1,9 @@
 """Assembles the single-file dashboard from the Silver + cross-reference layers.
 
-Builds a compact row-level payload per dataset (categorical columns
-dictionary-encoded to integer indices) plus the pre-aggregated Bruta x
-Beneficiada cross-reference, and injects all three, plus the vanilla-JS app,
-into template.html. The output is one self-contained HTML file — no CDN, no
-build step, opens straight from disk.
+Builds a compact row-level payload per dataset (categorical columns encoded
+as integer indices) plus the cross-reference aggregates, then injects both
+plus the vanilla JS app into template.html. Output is one self-contained
+HTML file, no build step, opens straight from disk.
 """
 
 import json
