@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.git/
+data/bronze/
+data/silver/
+data/gold/
+output/
+.dagster_home/
+docs/screenshots/
