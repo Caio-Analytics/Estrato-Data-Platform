@@ -3,3 +3,5 @@ pandas>=2.2
 pyarrow>=17.0
 duckdb>=1.5
 pytest>=8.0
+dagster>=1.8
+dagster-webserver>=1.8
