@@ -1,5 +1,7 @@
 # Bateia Ops
 
+[![ci](https://github.com/Caio-Analytics/bateia-ops/actions/workflows/ci.yml/badge.svg)](https://github.com/Caio-Analytics/bateia-ops/actions/workflows/ci.yml)
+
 Reprodutibilidade (Docker) e orquestração (Dagster) para o pipeline de dados
 do [Bateia](https://github.com/Caio-Analytics/bateia) — o mesmo ETL em
 camadas sobre dados da mineração brasileira (ANM/RAL), agora rodando como um
