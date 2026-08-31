@@ -1,0 +1,2131 @@
+{
+  "metadados_execucao": {
+    "tabela": "Producao_Bruta",
+    "timestamp_utc": "2026-08-29T01:39:09.206327+00:00",
+    "versao_profiler": "3.0.0",
+    "schema_version": "3.0",
+    "linhas_originais": 6313,
+    "linhas_analisadas": 6313,
+    "amostragem_aplicada": false,
+    "total_colunas": 14,
+    "layout": {
+      "linha_cabecalho": 0,
+      "linhas_rodape_removidas": 0,
+      "colunas_vazias_removidas": [],
+      "separador": ",",
+      "encoding": "cp1252",
+      "avisos": []
+    },
+    "score_qualidade": {
+      "score": 63.5,
+      "nota": "C",
+      "colunas_comprometidas": 9,
+      "colunas_criticas": [
+        {
+          "coluna": "Indicação Contido",
+          "dano": 0.717,
+          "motivos": [
+            "72% de nulos"
+          ]
+        },
+        {
+          "coluna": "Quantidade Produção - Minério ROM (t)",
+          "dano": 0.7,
+          "motivos": [
+            "mistura de tipos"
+          ]
+        },
+        {
+          "coluna": "Quantidade Contido",
+          "dano": 0.7,
+          "motivos": [
+            "mistura de tipos"
+          ]
+        },
+        {
+          "coluna": "Quantidade Transformação / Consumo / Utilização (t)",
+          "dano": 0.7,
+          "motivos": [
+            "mistura de tipos"
+          ]
+        },
+        {
+          "coluna": "Valor Transformação / Consumo / Utilização nesta mina (R$)",
+          "dano": 0.7,
+          "motivos": [
+            "mistura de tipos"
+          ]
+        },
+        {
+          "coluna": "Quantidade Transferência para Transformação / Utilização / Consumo (t)",
+          "dano": 0.7,
+          "motivos": [
+            "mistura de tipos"
+          ]
+        },
+        {
+          "coluna": "Valor Transferência para Transformação / Utilização / Consumo (R$)",
+          "dano": 0.7,
+          "motivos": [
+            "mistura de tipos"
+          ]
+        },
+        {
+          "coluna": "Unidade de Medida - Contido",
+          "dano": 0.6,
+          "motivos": [
+            "nulos disfarçados"
+          ]
+        },
+        {
+          "coluna": "Quantidade Venda (t)",
+          "dano": 0.5,
+          "motivos": [
+            "grafias divergentes"
+          ]
+        }
+      ],
+      "penalidades": [
+        {
+          "dimensao": "Colunas comprometidas",
+          "intensidade": 0.4298,
+          "pontos_perdidos": 36.53
+        }
+      ]
+    },
+    "risco_lgpd": {
+      "nivel": "🔴 Alta",
+      "exposicao": 0.9,
+      "colunas_sensiveis": [
+        {
+          "coluna": "Ano base",
+          "tipo": "Nome de pessoa"
+        }
+      ],
+      "pii_em_texto_livre": [],
+      "recomendacao": "1 coluna(s) com dado pessoal. Mascarar ou hashear antes de compartilhar o arquivo, e restringir quem acessa a camada que guarda o valor original."
+    },
+    "duplicatas": {
+      "qtd_linhas_duplicadas": 0,
+      "pct_linhas_duplicadas": 0.0,
+      "qtd_grupos_duplicados": 0
+    },
+    "resumo_qualidade": {
+      "colunas_com_nulos": 1,
+      "colunas_100pct_nulas": 0,
+      "colunas_sensiveis_lgpd": 1,
+      "colunas_com_sentinela": 1,
+      "semanticas_mapeadas": 8,
+      "semanticas_encontradas": [
+        "Cargo / Função",
+        "Estrutura Organizacional",
+        "Financeiro / Custo",
+        "Localização Geográfica",
+        "Nome / Identificação Pessoal",
+        "Produto / Item",
+        "Quantidade / Métrica",
+        "Valor Financeiro"
+      ],
+      "kpis_habilitados": 2,
+      "total_recomendacoes": 12
+    },
+    "abas_ignoradas": []
+  },
+  "colunas": [
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Ano base",
+      "Tipo_Inferred": "Número Inteiro",
+      "Semantica_IA": "Nome / Identificação Pessoal",
+      "Papel": "Nome / Identificação Pessoal",
+      "Dominio": null,
+      "Semantica_Score": 0.4617,
+      "Semantica_Origem": "abreviatura 'ano' → 'aluno'",
+      "Semantica_Conclusiva": false,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Nome / Identificação Pessoal",
+          "eixo": "papel",
+          "confianca": 0.4617,
+          "evidencias": [
+            "abreviatura 'ano' → 'aluno'"
+          ]
+        },
+        {
+          "semantica": "Texto Descritivo Livre",
+          "eixo": "papel",
+          "confianca": 0.3845,
+          "evidencias": [
+            "abreviatura 'ano' → 'anotacao'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 16,
+      "Ratio_Unicidade": 0.0025,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "🏷️ Categórica / Dimensão Curta",
+      "Dado_Sensivel_LGPD": "Nome de pessoa",
+      "Amostra_Valores": "2***, 2***, 2***, 2***, 2***, 2***, 2***, 2***, 2***, 2***, 2***, 2***, 2***, 2***, 2***, 2***",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": false
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "int64",
+        "dtype_sugerido": "int16",
+        "memoria_atual_mb": 0.051,
+        "memoria_sugerida_mb": 0.013,
+        "economia_mb": 0.038,
+        "economia_pct": 0.748
+      },
+      "Stats_Extra": {
+        "qtd_negativos": 0,
+        "qtd_zeros": 0,
+        "qtd_inf": 0,
+        "distribuicao_top5": [
+          {
+            "valor": "2***",
+            "frequencia_relativa": 0.0662,
+            "frequencia_pct": "6.6%"
+          },
+          {
+            "valor": "2***",
+            "frequencia_relativa": 0.0659,
+            "frequencia_pct": "6.6%"
+          },
+          {
+            "valor": "2***",
+            "frequencia_relativa": 0.0657,
+            "frequencia_pct": "6.6%"
+          },
+          {
+            "valor": "2***",
+            "frequencia_relativa": 0.0657,
+            "frequencia_pct": "6.6%"
+          },
+          {
+            "valor": "2***",
+            "frequencia_relativa": 0.0651,
+            "frequencia_pct": "6.5%"
+          }
+        ],
+        "min": 2010.0,
+        "max": 2025.0,
+        "media": 2017.677491,
+        "mediana": 2018.0,
+        "desvio_padrao": 4.596063,
+        "coef_variacao": 0.002278,
+        "assimetria": -0.044058,
+        "curtose": -1.20782,
+        "outliers_iqr": {
+          "metodo": "IQR",
+          "assimetria": -0.044058,
+          "medcouple": null,
+          "q1": 2014.0,
+          "q3": 2022.0,
+          "iqr": 8.0,
+          "limite_inferior": 2002.0,
+          "limite_superior": 2034.0,
+          "qtd_outliers_inferiores": 0,
+          "qtd_outliers_superiores": 0,
+          "qtd_outliers_total": 0
+        },
+        "histograma": {
+          "faixas": [
+            {
+              "de": 2010.0,
+              "ate": 2010.8333,
+              "qtd": 353
+            },
+            {
+              "de": 2010.8333,
+              "ate": 2011.6667,
+              "qtd": 380
+            },
+            {
+              "de": 2011.6667,
+              "ate": 2012.5,
+              "qtd": 379
+            },
+            {
+              "de": 2012.5,
+              "ate": 2013.3333,
+              "qtd": 385
+            },
+            {
+              "de": 2013.3333,
+              "ate": 2014.1667,
+              "qtd": 397
+            },
+            {
+              "de": 2014.1667,
+              "ate": 2015.0,
+              "qtd": 0
+            },
+            {
+              "de": 2015.0,
+              "ate": 2015.8333,
+              "qtd": 390
+            },
+            {
+              "de": 2015.8333,
+              "ate": 2016.6667,
+              "qtd": 365
+            },
+            {
+              "de": 2016.6667,
+              "ate": 2017.5,
+              "qtd": 398
+            },
+            {
+              "de": 2017.5,
+              "ate": 2018.3333,
+              "qtd": 395
+            },
+            {
+              "de": 2018.3333,
+              "ate": 2019.1667,
+              "qtd": 397
+            },
+            {
+              "de": 2019.1667,
+              "ate": 2020.0,
+              "qtd": 0
+            },
+            {
+              "de": 2020.0,
+              "ate": 2020.8333,
+              "qtd": 415
+            },
+            {
+              "de": 2020.8333,
+              "ate": 2021.6667,
+              "qtd": 418
+            },
+            {
+              "de": 2021.6667,
+              "ate": 2022.5,
+              "qtd": 399
+            },
+            {
+              "de": 2022.5,
+              "ate": 2023.3333,
+              "qtd": 411
+            },
+            {
+              "de": 2023.3333,
+              "ate": 2024.1667,
+              "qtd": 416
+            },
+            {
+              "de": 2024.1667,
+              "ate": 2025.0,
+              "qtd": 415
+            }
+          ],
+          "min": 2010.0,
+          "max": 2025.0
+        },
+        "testes_hipotese": {
+          "shapiro_wilk": {
+            "aplicavel": true,
+            "estatistica_w": 0.945626,
+            "p_valor": 0.0,
+            "normal_provavel": false,
+            "assimetria": -0.044058,
+            "curtose_excesso": -1.20782,
+            "desvio_relevante": true,
+            "n_amostra": 5000
+          },
+          "intervalo_confianca_media_95": {
+            "aplicavel": true,
+            "media": 2017.677491,
+            "limite_inferior": 2017.564094,
+            "limite_superior": 2017.790887
+          },
+          "distribuicao_provavel": {
+            "aplicavel": true,
+            "distribuicao": "uniforme",
+            "criterio": "AIC",
+            "aic": 34195.84,
+            "ks_distancia": 0.0657,
+            "delta_aic_segundo": 2979.85,
+            "escolha_conclusiva": true,
+            "ranking": [
+              {
+                "distribuicao": "uniforme",
+                "aic": 34195.84,
+                "ks_distancia": 0.0657
+              },
+              {
+                "distribuicao": "normal",
+                "aic": 37175.69,
+                "ks_distancia": 0.0913
+              },
+              {
+                "distribuicao": "gama",
+                "aic": 37176.12,
+                "ks_distancia": 0.0914
+              },
+              {
+                "distribuicao": "lognormal",
+                "aic": 37176.34,
+                "ks_distancia": 0.0915
+              }
+            ],
+            "n_amostra": 6313
+          }
+        }
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "UF",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Localização Geográfica",
+      "Papel": null,
+      "Dominio": "Localização Geográfica",
+      "Semantica_Score": 0.99,
+      "Semantica_Origem": "valores correspondem a UF brasileira (100% da coluna) + nome parecido com 'uf'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Localização Geográfica",
+          "eixo": "dominio",
+          "confianca": 0.99,
+          "evidencias": [
+            "valores correspondem a UF brasileira (100% da coluna)",
+            "nome parecido com 'uf'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 27,
+      "Ratio_Unicidade": 0.0043,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "📂 Dimensão Média",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PI, PR, RJ, RN, RO, RR, RS, SC, SE, SP, TO",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": false,
+          "tipos_detectados": [],
+          "proporcoes": {}
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": false
+        },
+        "formato": {
+          "tem_formato": true,
+          "formato_dominante": "AA",
+          "cobertura": 1.0,
+          "qtd_formatos_distintos": 1,
+          "exemplo_conforme": "MG",
+          "qtd_fora_do_padrao": 0,
+          "exemplos_fora_do_padrao": []
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": "category",
+        "memoria_atual_mb": 0.063,
+        "memoria_sugerida_mb": 0.007,
+        "economia_mb": 0.057,
+        "economia_pct": 0.8938
+      },
+      "Stats_Extra": {
+        "str_len_min": 2,
+        "str_len_max": 2,
+        "str_len_media": 2.0,
+        "str_len_std": 0.0,
+        "comprimento_fixo": true,
+        "distribuicao_top5": [
+          {
+            "valor": "MG",
+            "frequencia_relativa": 0.1012,
+            "frequencia_pct": "10.1%"
+          },
+          {
+            "valor": "BA",
+            "frequencia_relativa": 0.076,
+            "frequencia_pct": "7.6%"
+          },
+          {
+            "valor": "GO",
+            "frequencia_relativa": 0.0675,
+            "frequencia_pct": "6.7%"
+          },
+          {
+            "valor": "PA",
+            "frequencia_relativa": 0.051,
+            "frequencia_pct": "5.1%"
+          },
+          {
+            "valor": "PB",
+            "frequencia_relativa": 0.051,
+            "frequencia_pct": "5.1%"
+          }
+        ],
+        "testes_hipotese": {
+          "qui_quadrado_uniformidade": {
+            "aplicavel": true,
+            "estatistica": 1878.230318,
+            "p_valor": 0.0,
+            "distribuicao_uniforme_provavel": false,
+            "v_cramer": 0.107,
+            "n_categorias": 27
+          }
+        }
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Classe Substância",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Cargo / Função",
+      "Papel": null,
+      "Dominio": "Cargo / Função",
+      "Semantica_Score": 0.8,
+      "Semantica_Origem": "nome parecido com 'classe'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Cargo / Função",
+          "eixo": "dominio",
+          "confianca": 0.8,
+          "evidencias": [
+            "nome parecido com 'classe'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 4,
+      "Ratio_Unicidade": 0.0006,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "🏷️ Categórica / Dimensão Curta",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "Não-Metálicos, Metálicos, Gemas e Diamantes, Energéticos",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": false,
+          "tipos_detectados": [],
+          "proporcoes": {}
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": false
+        },
+        "formato": {
+          "tem_formato": false
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": "category",
+        "memoria_atual_mb": 0.138,
+        "memoria_sugerida_mb": 0.007,
+        "economia_mb": 0.131,
+        "economia_pct": 0.9526
+      },
+      "Stats_Extra": {
+        "str_len_min": 9,
+        "str_len_max": 17,
+        "str_len_media": 12.15,
+        "str_len_std": 1.99,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": "Não-Metálicos",
+            "frequencia_relativa": 0.6951,
+            "frequencia_pct": "69.5%"
+          },
+          {
+            "valor": "Metálicos",
+            "frequencia_relativa": 0.2465,
+            "frequencia_pct": "24.6%"
+          },
+          {
+            "valor": "Gemas e Diamantes",
+            "frequencia_relativa": 0.0425,
+            "frequencia_pct": "4.2%"
+          },
+          {
+            "valor": "Energéticos",
+            "frequencia_relativa": 0.016,
+            "frequencia_pct": "1.6%"
+          }
+        ],
+        "testes_hipotese": {
+          "qui_quadrado_uniformidade": {
+            "aplicavel": true,
+            "estatistica": 7472.968636,
+            "p_valor": 0.0,
+            "distribuicao_uniforme_provavel": false,
+            "v_cramer": 0.6282,
+            "n_categorias": 4
+          }
+        }
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Substância Mineral",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Genérico / Não mapeado",
+      "Papel": null,
+      "Dominio": null,
+      "Semantica_Score": 0.0,
+      "Semantica_Origem": "Unmatched",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [],
+      "Qtd_Unicos": 56,
+      "Ratio_Unicidade": 0.0089,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "📂 Dimensão Média",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "Areia, Argilas, Alumínio (Bauxita), Caulim, Manganês, Fluorita e Criolita, Prata, Dolomito e Magnesita, Zinco, Cromo",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": false,
+          "tipos_detectados": [],
+          "proporcoes": {}
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": false
+        },
+        "formato": {
+          "tem_formato": false
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": "category",
+        "memoria_atual_mb": 0.135,
+        "memoria_sugerida_mb": 0.008,
+        "economia_mb": 0.127,
+        "economia_pct": 0.9434
+      },
+      "Stats_Extra": {
+        "str_len_min": 3,
+        "str_len_max": 40,
+        "str_len_media": 13.11,
+        "str_len_std": 9.78,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": "Areia",
+            "frequencia_relativa": 0.0684,
+            "frequencia_pct": "6.8%"
+          },
+          {
+            "valor": "Argilas",
+            "frequencia_relativa": 0.068,
+            "frequencia_pct": "6.8%"
+          },
+          {
+            "valor": "Rochas (Britadas) e Cascalho",
+            "frequencia_relativa": 0.067,
+            "frequencia_pct": "6.7%"
+          },
+          {
+            "valor": "Calcário",
+            "frequencia_relativa": 0.0613,
+            "frequencia_pct": "6.1%"
+          },
+          {
+            "valor": "Saibro",
+            "frequencia_relativa": 0.0577,
+            "frequencia_pct": "5.8%"
+          }
+        ]
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Quantidade Produção - Minério ROM (t)",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Quantidade / Métrica",
+      "Papel": "Quantidade / Métrica",
+      "Dominio": "Produto / Item",
+      "Semantica_Score": 0.9383,
+      "Semantica_Origem": "qualificador inicial 'quantidade' + token 'quantidade'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Quantidade / Métrica",
+          "eixo": "papel",
+          "confianca": 0.9383,
+          "evidencias": [
+            "qualificador inicial 'quantidade'",
+            "token 'quantidade'"
+          ]
+        },
+        {
+          "semantica": "Produto / Item",
+          "eixo": "dominio",
+          "confianca": 0.7371,
+          "evidencias": [
+            "nome parecido com 'product'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 5423,
+      "Ratio_Unicidade": 0.859,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "📋 Dimensão Longa (Texto Livre)",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "1571285,390000, 2891619,650000, 30,476900, 1217693,347700, 1184718,440000, 22799,150000, 225,490000, 679509,020000, 586,750000, 16438,500000",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": true,
+          "tipos_detectados": [
+            "numerico",
+            "texto_puro"
+          ],
+          "proporcoes": {
+            "numerico": 0.8852,
+            "data": 0.0,
+            "texto_puro": 0.1148,
+            "vazio_ou_nulo": 0.0
+          }
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "formato": {
+          "tem_formato": false
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": null,
+        "memoria_atual_mb": 0.127
+      },
+      "Stats_Extra": {
+        "str_len_min": 7,
+        "str_len_max": 16,
+        "str_len_media": 12.12,
+        "str_len_std": 2.31,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": ",000000",
+            "frequencia_relativa": 0.1093,
+            "frequencia_pct": "10.9%"
+          },
+          {
+            "valor": "2000,000000",
+            "frequencia_relativa": 0.0013,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "1,000000",
+            "frequencia_relativa": 0.0013,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "1000,000000",
+            "frequencia_relativa": 0.0011,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "4000,000000",
+            "frequencia_relativa": 0.001,
+            "frequencia_pct": "0.1%"
+          }
+        ]
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Quantidade Contido",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Quantidade / Métrica",
+      "Papel": "Quantidade / Métrica",
+      "Dominio": "Financeiro / Custo",
+      "Semantica_Score": 0.9383,
+      "Semantica_Origem": "qualificador inicial 'quantidade' + token 'quantidade'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Quantidade / Métrica",
+          "eixo": "papel",
+          "confianca": 0.9383,
+          "evidencias": [
+            "qualificador inicial 'quantidade'",
+            "token 'quantidade'"
+          ]
+        },
+        {
+          "semantica": "Financeiro / Custo",
+          "eixo": "dominio",
+          "confianca": 0.6994,
+          "evidencias": [
+            "nome parecido com 'conta'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 1711,
+      "Ratio_Unicidade": 0.271,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "📋 Dimensão Longa (Texto Livre)",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "28293,460000000000000, 282565,070000000000000, 346120,720000000000000, 163273,020000000000000, ,000190000000000, 5,200000000000000, 9650,193310000000000, 124615,600000000000000, 13250,820000000000000, 12658560,000000000000000",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": true,
+          "tipos_detectados": [
+            "numerico",
+            "texto_puro"
+          ],
+          "proporcoes": {
+            "numerico": 0.2642,
+            "data": 0.0,
+            "texto_puro": 0.7358,
+            "vazio_ou_nulo": 0.0
+          }
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": false
+        },
+        "formato": {
+          "tem_formato": false
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": "category",
+        "memoria_atual_mb": 0.159,
+        "memoria_sugerida_mb": 0.062,
+        "economia_mb": 0.098,
+        "economia_pct": 0.6128
+      },
+      "Stats_Extra": {
+        "str_len_min": 16,
+        "str_len_max": 25,
+        "str_len_media": 17.24,
+        "str_len_std": 2.24,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": ",000000000000000",
+            "frequencia_relativa": 0.7201,
+            "frequencia_pct": "72.0%"
+          },
+          {
+            "valor": "1,000000000000000",
+            "frequencia_relativa": 0.0011,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "1000,000000000000000",
+            "frequencia_relativa": 0.0006,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": ",001000000000000",
+            "frequencia_relativa": 0.0006,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": ",010000000000000",
+            "frequencia_relativa": 0.0005,
+            "frequencia_pct": "0.0%"
+          }
+        ]
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Unidade de Medida - Contido",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Valor Financeiro",
+      "Papel": "Valor Financeiro",
+      "Dominio": "Estrutura Organizacional",
+      "Semantica_Score": 0.5856,
+      "Semantica_Origem": "contexto da tabela favorece 'de' → 'despesa' + abreviatura 'de' → 'despesa'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Estrutura Organizacional",
+          "eixo": "dominio",
+          "confianca": 0.8,
+          "evidencias": [
+            "nome parecido com 'unidade'"
+          ]
+        },
+        {
+          "semantica": "Financeiro / Custo",
+          "eixo": "dominio",
+          "confianca": 0.7336,
+          "evidencias": [
+            "nome parecido com 'conta'",
+            "contexto da tabela favorece 'de' → 'despesa'"
+          ]
+        },
+        {
+          "semantica": "Perfil do Colaborador",
+          "eixo": "dominio",
+          "confianca": 0.7238,
+          "evidencias": [
+            "nome parecido com 'idade'"
+          ]
+        },
+        {
+          "semantica": "Valor Financeiro",
+          "eixo": "papel",
+          "confianca": 0.5856,
+          "evidencias": [
+            "contexto da tabela favorece 'de' → 'despesa'",
+            "abreviatura 'de' → 'despesa'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 4,
+      "Ratio_Unicidade": 0.0006,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "🏷️ Categórica / Dimensão Curta",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "-, kg, t, ct",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": false,
+          "tipos_detectados": [],
+          "proporcoes": {}
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": true,
+          "valores": [
+            {
+              "valor": "-",
+              "qtd": 4041,
+              "pct": 0.6401
+            }
+          ],
+          "qtd_total": 4041,
+          "pct_total": 0.6401
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": false
+        },
+        "formato": {
+          "tem_formato": false
+        },
+        "nulos_efetivos_qtd": 4041,
+        "nulos_efetivos_pct": 64.0108
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": "category",
+        "memoria_atual_mb": 0.058,
+        "memoria_sugerida_mb": 0.006,
+        "economia_mb": 0.051,
+        "economia_pct": 0.8874
+      },
+      "Stats_Extra": {
+        "str_len_min": 1,
+        "str_len_max": 2,
+        "str_len_media": 1.1,
+        "str_len_std": 0.3,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": "-",
+            "frequencia_relativa": 0.6401,
+            "frequencia_pct": "64.0%"
+          },
+          {
+            "valor": "t",
+            "frequencia_relativa": 0.261,
+            "frequencia_pct": "26.1%"
+          },
+          {
+            "valor": "kg",
+            "frequencia_relativa": 0.0847,
+            "frequencia_pct": "8.5%"
+          },
+          {
+            "valor": "ct",
+            "frequencia_relativa": 0.0141,
+            "frequencia_pct": "1.4%"
+          }
+        ],
+        "testes_hipotese": {
+          "qui_quadrado_uniformidade": {
+            "aplicavel": true,
+            "estatistica": 5940.908443,
+            "p_valor": 0.0,
+            "distribuicao_uniforme_provavel": false,
+            "v_cramer": 0.5601,
+            "n_categorias": 4
+          }
+        }
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Indicação Contido",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Financeiro / Custo",
+      "Papel": null,
+      "Dominio": "Financeiro / Custo",
+      "Semantica_Score": 0.6784,
+      "Semantica_Origem": "nome parecido com 'conta'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Financeiro / Custo",
+          "eixo": "dominio",
+          "confianca": 0.6784,
+          "evidencias": [
+            "nome parecido com 'conta'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 27,
+      "Ratio_Unicidade": 0.0043,
+      "Qtd_Nulos": 4527,
+      "Pct_Nulos": 71.7092,
+      "Caracteristica": "📂 Dimensão Média",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "Sn, Nb2O5, ZrSiO4, Fe, Cr2O3, Au, BaSO4, Mn,  Ni, Cu, P2O5, Al2O3, Co, TiO2, Ag, Cd, Pb, S, Zn, Ta2O5, K2O, Li2O, WO3, ETR, BeO, V, Mo",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": false,
+          "tipos_detectados": [],
+          "proporcoes": {}
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": false
+        },
+        "formato": {
+          "tem_formato": false
+        },
+        "nulos_efetivos_qtd": 4527,
+        "nulos_efetivos_pct": 71.7092
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": "category",
+        "memoria_atual_mb": 0.057,
+        "memoria_sugerida_mb": 0.007,
+        "economia_mb": 0.05,
+        "economia_pct": 0.8816
+      },
+      "Stats_Extra": {
+        "str_len_min": 1,
+        "str_len_max": 6,
+        "str_len_media": 3.1,
+        "str_len_std": 1.35,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": "Au",
+            "frequencia_relativa": 0.1226,
+            "frequencia_pct": "12.3%"
+          },
+          {
+            "valor": "Fe",
+            "frequencia_relativa": 0.1025,
+            "frequencia_pct": "10.2%"
+          },
+          {
+            "valor": "Mn",
+            "frequencia_relativa": 0.0795,
+            "frequencia_pct": "8.0%"
+          },
+          {
+            "valor": "P2O5",
+            "frequencia_relativa": 0.0677,
+            "frequencia_pct": "6.8%"
+          },
+          {
+            "valor": "Sn",
+            "frequencia_relativa": 0.0588,
+            "frequencia_pct": "5.9%"
+          }
+        ],
+        "testes_hipotese": {
+          "qui_quadrado_uniformidade": {
+            "aplicavel": true,
+            "estatistica": 1157.755879,
+            "p_valor": 0.0,
+            "distribuicao_uniforme_provavel": false,
+            "v_cramer": 0.1579,
+            "n_categorias": 27
+          }
+        }
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Quantidade Venda (t)",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Quantidade / Métrica",
+      "Papel": "Quantidade / Métrica",
+      "Dominio": null,
+      "Semantica_Score": 0.9383,
+      "Semantica_Origem": "qualificador inicial 'quantidade' + token 'quantidade'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Quantidade / Métrica",
+          "eixo": "papel",
+          "confianca": 0.9383,
+          "evidencias": [
+            "qualificador inicial 'quantidade'",
+            "token 'quantidade'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 3729,
+      "Ratio_Unicidade": 0.5907,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "📋 Dimensão Longa (Texto Livre)",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "210028,44000000003, 9526,5599999999995, 218535,07999999999, 10406,610000000001, 111934,55, 891411,21999999997, 391767,5, 383,69, 8811,5200000000004, 11915,440000000001",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": false,
+          "tipos_detectados": [],
+          "proporcoes": {}
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": true,
+          "valores_unicos_atual": 3729,
+          "valores_unicos_normalizado": 3727,
+          "grupos_afetados": 2,
+          "exemplos": [
+            {
+              "variantes": [
+                "145",
+                "14,5"
+              ],
+              "qtd_total": 2
+            },
+            {
+              "variantes": [
+                "1,24",
+                "124"
+              ],
+              "qtd_total": 2
+            }
+          ]
+        },
+        "formato": {
+          "tem_formato": false
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": null,
+        "memoria_atual_mb": 0.108
+      },
+      "Stats_Extra": {
+        "str_len_min": 1,
+        "str_len_max": 21,
+        "str_len_media": 9.08,
+        "str_len_std": 7.82,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": "0",
+            "frequencia_relativa": 0.3993,
+            "frequencia_pct": "39.9%"
+          },
+          {
+            "valor": "2000",
+            "frequencia_relativa": 0.001,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "1000",
+            "frequencia_relativa": 0.001,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "60",
+            "frequencia_relativa": 0.0008,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "4000",
+            "frequencia_relativa": 0.0008,
+            "frequencia_pct": "0.1%"
+          }
+        ]
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Valor Venda (R$)",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Valor Financeiro",
+      "Papel": "Valor Financeiro",
+      "Dominio": null,
+      "Semantica_Score": 0.9383,
+      "Semantica_Origem": "qualificador inicial 'valor' + token 'valor'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Valor Financeiro",
+          "eixo": "papel",
+          "confianca": 0.9383,
+          "evidencias": [
+            "qualificador inicial 'valor'",
+            "token 'valor'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 3760,
+      "Ratio_Unicidade": 0.5956,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "📋 Dimensão Longa (Texto Livre)",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "107270, 781507,22000000009, 827347,19999999995, 34671828,29999999, 242786,69, 7147268,6000000006, 1945130,99, 1637690,1799999999, 6686129,9199999999, 113514033,82499999",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": false,
+          "tipos_detectados": [],
+          "proporcoes": {}
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": false
+        },
+        "formato": {
+          "tem_formato": false
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": null,
+        "memoria_atual_mb": 0.11
+      },
+      "Stats_Extra": {
+        "str_len_min": 1,
+        "str_len_max": 18,
+        "str_len_media": 9.33,
+        "str_len_std": 7.75,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": "0",
+            "frequencia_relativa": 0.3985,
+            "frequencia_pct": "39.9%"
+          },
+          {
+            "valor": "60000",
+            "frequencia_relativa": 0.0008,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "40000",
+            "frequencia_relativa": 0.0008,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "0,12",
+            "frequencia_relativa": 0.0005,
+            "frequencia_pct": "0.0%"
+          },
+          {
+            "valor": "12000",
+            "frequencia_relativa": 0.0005,
+            "frequencia_pct": "0.0%"
+          }
+        ]
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Quantidade Transformação / Consumo / Utilização (t)",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Quantidade / Métrica",
+      "Papel": "Quantidade / Métrica",
+      "Dominio": null,
+      "Semantica_Score": 0.9383,
+      "Semantica_Origem": "qualificador inicial 'quantidade' + token 'quantidade'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Quantidade / Métrica",
+          "eixo": "papel",
+          "confianca": 0.9383,
+          "evidencias": [
+            "qualificador inicial 'quantidade'",
+            "token 'quantidade'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 1028,
+      "Ratio_Unicidade": 0.1628,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "📋 Dimensão Longa (Texto Livre)",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "12931,240000, 20,000000, 31248,000000, 285,600000, 73220,970000, 26377,260000, 37139,030000, 153917,750000, 30542,070000, 29275,340000",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": true,
+          "tipos_detectados": [
+            "numerico",
+            "texto_puro"
+          ],
+          "proporcoes": {
+            "numerico": 0.1704,
+            "data": 0.0,
+            "texto_puro": 0.8296,
+            "vazio_ou_nulo": 0.0
+          }
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": false
+        },
+        "formato": {
+          "tem_formato": true,
+          "formato_dominante": ",999999",
+          "cobertura": 0.8296,
+          "qtd_formatos_distintos": 8,
+          "exemplo_conforme": ",000000",
+          "qtd_fora_do_padrao": 852,
+          "exemplos_fora_do_padrao": [
+            {
+              "valor": "500,000000",
+              "formato": "999,999999"
+            },
+            {
+              "valor": "187,610000",
+              "formato": "999,999999"
+            },
+            {
+              "valor": "58661,000000",
+              "formato": "99999,999999"
+            },
+            {
+              "valor": "82558,260000",
+              "formato": "99999,999999"
+            },
+            {
+              "valor": "4000,000000",
+              "formato": "9999,999999"
+            }
+          ]
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": "category",
+        "memoria_atual_mb": 0.1,
+        "memoria_sugerida_mb": 0.033,
+        "economia_mb": 0.067,
+        "economia_pct": 0.6683
+      },
+      "Stats_Extra": {
+        "str_len_min": 7,
+        "str_len_max": 15,
+        "str_len_media": 7.78,
+        "str_len_std": 1.8,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": ",000000",
+            "frequencia_relativa": 0.8296,
+            "frequencia_pct": "83.0%"
+          },
+          {
+            "valor": ",120000",
+            "frequencia_relativa": 0.0014,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "400,000000",
+            "frequencia_relativa": 0.0008,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "150,000000",
+            "frequencia_relativa": 0.0006,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "20000,000000",
+            "frequencia_relativa": 0.0006,
+            "frequencia_pct": "0.1%"
+          }
+        ]
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Valor Transformação / Consumo / Utilização nesta mina (R$)",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Valor Financeiro",
+      "Papel": "Valor Financeiro",
+      "Dominio": null,
+      "Semantica_Score": 0.9383,
+      "Semantica_Origem": "qualificador inicial 'valor' + token 'valor'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Valor Financeiro",
+          "eixo": "papel",
+          "confianca": 0.9383,
+          "evidencias": [
+            "qualificador inicial 'valor'",
+            "token 'valor'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 1019,
+      "Ratio_Unicidade": 0.1614,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "📋 Dimensão Longa (Texto Livre)",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "518035,890000, 63750,000000, 53200,000000, 2037138,950000, 808228,720000, 2000,000000, 86256,000000, 442,000000, ,130000, 172820,000000",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": true,
+          "tipos_detectados": [
+            "numerico",
+            "texto_puro"
+          ],
+          "proporcoes": {
+            "numerico": 0.1676,
+            "data": 0.0,
+            "texto_puro": 0.8324,
+            "vazio_ou_nulo": 0.0
+          }
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": false
+        },
+        "formato": {
+          "tem_formato": true,
+          "formato_dominante": ",999999",
+          "cobertura": 0.8324,
+          "qtd_formatos_distintos": 9,
+          "exemplo_conforme": ",000000",
+          "qtd_fora_do_padrao": 838,
+          "exemplos_fora_do_padrao": [
+            {
+              "valor": "22500,000000",
+              "formato": "99999,999999"
+            },
+            {
+              "valor": "32000,000000",
+              "formato": "99999,999999"
+            },
+            {
+              "valor": "9260950,810000",
+              "formato": "9999999,999999"
+            },
+            {
+              "valor": "1025674,060000",
+              "formato": "9999999,999999"
+            },
+            {
+              "valor": "1183,850000",
+              "formato": "9999,999999"
+            }
+          ]
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": "category",
+        "memoria_atual_mb": 0.101,
+        "memoria_sugerida_mb": 0.034,
+        "economia_mb": 0.067,
+        "economia_pct": 0.6636
+      },
+      "Stats_Extra": {
+        "str_len_min": 7,
+        "str_len_max": 15,
+        "str_len_media": 7.92,
+        "str_len_std": 2.13,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": ",000000",
+            "frequencia_relativa": 0.8289,
+            "frequencia_pct": "82.9%"
+          },
+          {
+            "valor": ",120000",
+            "frequencia_relativa": 0.0025,
+            "frequencia_pct": "0.3%"
+          },
+          {
+            "valor": "12,000000",
+            "frequencia_relativa": 0.0013,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "400,000000",
+            "frequencia_relativa": 0.0008,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": ",040000",
+            "frequencia_relativa": 0.0006,
+            "frequencia_pct": "0.1%"
+          }
+        ]
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Quantidade Transferência para Transformação / Utilização / Consumo (t)",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Quantidade / Métrica",
+      "Papel": "Quantidade / Métrica",
+      "Dominio": null,
+      "Semantica_Score": 0.9383,
+      "Semantica_Origem": "qualificador inicial 'quantidade' + token 'quantidade'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Quantidade / Métrica",
+          "eixo": "papel",
+          "confianca": 0.9383,
+          "evidencias": [
+            "qualificador inicial 'quantidade'",
+            "token 'quantidade'"
+          ]
+        },
+        {
+          "semantica": "Nome / Identificação Pessoal",
+          "eixo": "papel",
+          "confianca": 0.361,
+          "evidencias": [
+            "abreviatura 'para' → 'participante'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 1971,
+      "Ratio_Unicidade": 0.3122,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "📋 Dimensão Longa (Texto Livre)",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "1551950,170000, 26032,850000, 1386,550000, 187345,020000, 2855,650000, 1756,080000, 14208,850000, 23392,880000, 346416,310000, 298889,820000",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": true,
+          "tipos_detectados": [
+            "numerico",
+            "texto_puro"
+          ],
+          "proporcoes": {
+            "numerico": 0.3186,
+            "data": 0.0,
+            "texto_puro": 0.6814,
+            "vazio_ou_nulo": 0.0
+          }
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": false
+        },
+        "formato": {
+          "tem_formato": false
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": "category",
+        "memoria_atual_mb": 0.105,
+        "memoria_sugerida_mb": 0.052,
+        "economia_mb": 0.052,
+        "economia_pct": 0.4994
+      },
+      "Stats_Extra": {
+        "str_len_min": 7,
+        "str_len_max": 15,
+        "str_len_media": 8.59,
+        "str_len_std": 2.42,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": ",000000",
+            "frequencia_relativa": 0.6818,
+            "frequencia_pct": "68.2%"
+          },
+          {
+            "valor": "600,000000",
+            "frequencia_relativa": 0.0008,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "1000,000000",
+            "frequencia_relativa": 0.0008,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": ",010000",
+            "frequencia_relativa": 0.0006,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": "550,000000",
+            "frequencia_relativa": 0.0005,
+            "frequencia_pct": "0.0%"
+          }
+        ]
+      }
+    },
+    {
+      "Tabela_Origem": "Producao_Bruta",
+      "Coluna": "Valor Transferência para Transformação / Utilização / Consumo (R$)",
+      "Tipo_Inferred": "Texto",
+      "Semantica_IA": "Valor Financeiro",
+      "Papel": "Valor Financeiro",
+      "Dominio": null,
+      "Semantica_Score": 0.9383,
+      "Semantica_Origem": "qualificador inicial 'valor' + token 'valor'",
+      "Semantica_Conclusiva": true,
+      "Semantica_Hipoteses": [
+        {
+          "semantica": "Valor Financeiro",
+          "eixo": "papel",
+          "confianca": 0.9383,
+          "evidencias": [
+            "qualificador inicial 'valor'",
+            "token 'valor'"
+          ]
+        },
+        {
+          "semantica": "Nome / Identificação Pessoal",
+          "eixo": "papel",
+          "confianca": 0.361,
+          "evidencias": [
+            "abreviatura 'para' → 'participante'"
+          ]
+        }
+      ],
+      "Qtd_Unicos": 1974,
+      "Ratio_Unicidade": 0.3127,
+      "Qtd_Nulos": 0,
+      "Pct_Nulos": 0.0,
+      "Caracteristica": "📋 Dimensão Longa (Texto Livre)",
+      "Dado_Sensivel_LGPD": "Nenhum",
+      "Amostra_Valores": "39600,000000, 182,410000, 1254316,900000, 40935,000000, 194262,000000, 120684,000000, 17761,070000, 13872664,140000, 694840,500000, 3136897,360000",
+      "Alertas": {
+        "data_como_texto": false,
+        "mistura_tipos": {
+          "tem_mistura": true,
+          "tipos_detectados": [
+            "numerico",
+            "texto_puro"
+          ],
+          "proporcoes": {
+            "numerico": 0.3156,
+            "data": 0.0,
+            "texto_puro": 0.6844,
+            "vazio_ou_nulo": 0.0
+          }
+        },
+        "stats_suprimidas_lgpd": false
+      },
+      "Qualidade": {
+        "mojibake": {
+          "tem_mojibake": false
+        },
+        "pii_texto_livre": {
+          "tem_pii": false
+        },
+        "documento_invalido": {
+          "tem_documento_invalido": false
+        },
+        "sentinelas": {
+          "tem_sentinela": false
+        },
+        "inconsistencia_normalizacao": {
+          "tem_inconsistencia": false
+        },
+        "formato": {
+          "tem_formato": false
+        },
+        "nulos_efetivos_qtd": 0,
+        "nulos_efetivos_pct": 0.0
+      },
+      "Otimizacao": {
+        "dtype_atual": "str",
+        "dtype_sugerido": "category",
+        "memoria_atual_mb": 0.107,
+        "memoria_sugerida_mb": 0.055,
+        "economia_mb": 0.052,
+        "economia_pct": 0.488
+      },
+      "Stats_Extra": {
+        "str_len_min": 7,
+        "str_len_max": 16,
+        "str_len_media": 8.95,
+        "str_len_std": 2.95,
+        "comprimento_fixo": false,
+        "distribuicao_top5": [
+          {
+            "valor": ",000000",
+            "frequencia_relativa": 0.6815,
+            "frequencia_pct": "68.1%"
+          },
+          {
+            "valor": ",120000",
+            "frequencia_relativa": 0.0022,
+            "frequencia_pct": "0.2%"
+          },
+          {
+            "valor": "12,000000",
+            "frequencia_relativa": 0.0014,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": ",010000",
+            "frequencia_relativa": 0.0008,
+            "frequencia_pct": "0.1%"
+          },
+          {
+            "valor": ",040000",
+            "frequencia_relativa": 0.0005,
+            "frequencia_pct": "0.0%"
+          }
+        ]
+      }
+    }
+  ],
+  "recomendacoes_etl": [
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "Ano base",
+      "Prioridade": "🔴 ALTA",
+      "Camada": "Silver",
+      "Acao": "LGPD: Mascarar/Hashear 'Ano base' (Nome de pessoa). Protege 6,313 registros (100.0%).",
+      "Linhas_Afetadas": 6313,
+      "Pct_Impacto": "100.0%"
+    },
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "Quantidade Produção - Minério ROM (t)",
+      "Prioridade": "🔴 ALTA",
+      "Camada": "Bronze",
+      "Acao": "'Quantidade Produção - Minério ROM (t)' contém mistura de tipos: ['numerico', 'texto_puro']. Normalizar antes de qualquer transformação.",
+      "Linhas_Afetadas": 6313,
+      "Pct_Impacto": "100.0%"
+    },
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "Quantidade Contido",
+      "Prioridade": "🔴 ALTA",
+      "Camada": "Bronze",
+      "Acao": "'Quantidade Contido' contém mistura de tipos: ['numerico', 'texto_puro']. Normalizar antes de qualquer transformação.",
+      "Linhas_Afetadas": 6313,
+      "Pct_Impacto": "100.0%"
+    },
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "Unidade de Medida - Contido",
+      "Prioridade": "🔴 ALTA",
+      "Camada": "Bronze",
+      "Acao": "'Unidade de Medida - Contido' usa '-' como marcador de ausência em 4,041 registros (64.0%). Converter para NULL — hoje entram como valor válido e distorcem contagens e médias.",
+      "Linhas_Afetadas": 4041,
+      "Pct_Impacto": "64.0%"
+    },
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "Quantidade Venda (t)",
+      "Prioridade": "🟡 MÉDIA",
+      "Camada": "Silver",
+      "Acao": "'Quantidade Venda (t)' tem o mesmo valor escrito de formas diferentes (ex.: '145' / '14,5'). Padronizar reduz a cardinalidade de 3729 para 3727 — sem isso qualquer GROUP BY divide o mesmo grupo em vários.",
+      "Linhas_Afetadas": 6313,
+      "Pct_Impacto": "100.0%"
+    },
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "Quantidade Transformação / Consumo / Utilização (t)",
+      "Prioridade": "🟡 MÉDIA",
+      "Camada": "Bronze",
+      "Acao": "'Quantidade Transformação / Consumo / Utilização (t)' segue o formato ,999999 em 83% dos valores (ex.: ',000000'), mas 852 valor(es) fogem dele: '500,000000', '187,610000', '58661,000000'. Em código de cadastro isso costuma ser digitação manual, campo truncado ou registro de outro sistema — conferir antes de usar como chave.",
+      "Linhas_Afetadas": 852
+    },
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "Quantidade Transformação / Consumo / Utilização (t)",
+      "Prioridade": "🔴 ALTA",
+      "Camada": "Bronze",
+      "Acao": "'Quantidade Transformação / Consumo / Utilização (t)' contém mistura de tipos: ['numerico', 'texto_puro']. Normalizar antes de qualquer transformação.",
+      "Linhas_Afetadas": 6313,
+      "Pct_Impacto": "100.0%"
+    },
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "Valor Transformação / Consumo / Utilização nesta mina (R$)",
+      "Prioridade": "🟡 MÉDIA",
+      "Camada": "Bronze",
+      "Acao": "'Valor Transformação / Consumo / Utilização nesta mina (R$)' segue o formato ,999999 em 83% dos valores (ex.: ',000000'), mas 838 valor(es) fogem dele: '22500,000000', '32000,000000', '9260950,810000'. Em código de cadastro isso costuma ser digitação manual, campo truncado ou registro de outro sistema — conferir antes de usar como chave.",
+      "Linhas_Afetadas": 838
+    },
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "Valor Transformação / Consumo / Utilização nesta mina (R$)",
+      "Prioridade": "🔴 ALTA",
+      "Camada": "Bronze",
+      "Acao": "'Valor Transformação / Consumo / Utilização nesta mina (R$)' contém mistura de tipos: ['numerico', 'texto_puro']. Normalizar antes de qualquer transformação.",
+      "Linhas_Afetadas": 6313,
+      "Pct_Impacto": "100.0%"
+    },
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "Quantidade Transferência para Transformação / Utilização / Consumo (t)",
+      "Prioridade": "🔴 ALTA",
+      "Camada": "Bronze",
+      "Acao": "'Quantidade Transferência para Transformação / Utilização / Consumo (t)' contém mistura de tipos: ['numerico', 'texto_puro']. Normalizar antes de qualquer transformação.",
+      "Linhas_Afetadas": 6313,
+      "Pct_Impacto": "100.0%"
+    },
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "Valor Transferência para Transformação / Utilização / Consumo (R$)",
+      "Prioridade": "🔴 ALTA",
+      "Camada": "Bronze",
+      "Acao": "'Valor Transferência para Transformação / Utilização / Consumo (R$)' contém mistura de tipos: ['numerico', 'texto_puro']. Normalizar antes de qualquer transformação.",
+      "Linhas_Afetadas": 6313,
+      "Pct_Impacto": "100.0%"
+    },
+    {
+      "Tabela": "Producao_Bruta",
+      "Coluna": "(tabela)",
+      "Prioridade": "🟢 BAIXA",
+      "Camada": "Silver",
+      "Acao": "Otimizar o dtype de 11 coluna(s) economiza 0.8 MB em memória: Ano base → int16, UF → category, Classe Substância → category, Substância Mineral → category (+7). O script de limpeza gerado já aplica todas.",
+      "Linhas_Afetadas": 6313
+    }
+  ],
+  "dependencias_funcionais": [
+    {
+      "determinante": "Substância Mineral",
+      "dependente": "Classe Substância",
+      "tipo": "Dependência Funcional Direta",
+      "descricao": "'Substância Mineral' determina unicamente 'Classe Substância'. Candidata à desnormalização ou chave composta."
+    }
+  ],
+  "colunas_redundantes": [],
+  "duplicatas_aproximadas": [],
+  "chaves_compostas": [],
+  "correlacoes": [
+    {
+      "coluna_a": "Classe Substância",
+      "coluna_b": "Indicação Contido",
+      "metrica": "V de Cramér",
+      "valor": 1.0,
+      "valor_secundario": null,
+      "forca": "forte"
+    },
+    {
+      "coluna_a": "Unidade de Medida - Contido",
+      "coluna_b": "Indicação Contido",
+      "metrica": "V de Cramér",
+      "valor": 0.808,
+      "valor_secundario": null,
+      "forca": "moderada"
+    }
+  ],
+  "hierarquias": [],
+  "explicacoes_de_medidas": [],
+  "regras_negocio": [],
+  "gap_analysis_kpis": [
+    {
+      "kpi_id": "KPI_HR_001",
+      "kpi_nome": "Volume de Esforço por Departamento",
+      "status": "✅ Habilitado",
+      "cobertura_pct": "100%",
+      "semanticas_presentes": [
+        "Estrutura Organizacional",
+        "Quantidade / Métrica"
+      ],
+      "semanticas_ausentes": [],
+      "recomendacao": "Tabela possui todos os requisitos para este KPI."
+    },
+    {
+      "kpi_id": "KPI_HR_002",
+      "kpi_nome": "Distribuição de Liderança por Perfil",
+      "status": "⚠️ Parcialmente Habilitado",
+      "cobertura_pct": "50%",
+      "semanticas_presentes": [
+        "Cargo / Função"
+      ],
+      "semanticas_ausentes": [
+        "Perfil do Colaborador"
+      ],
+      "recomendacao": "Inclua colunas com semântica: Perfil do Colaborador"
+    },
+    {
+      "kpi_id": "KPI_HR_003",
+      "kpi_nome": "Evolução de Custo de Pessoal",
+      "status": "⚠️ Parcialmente Habilitado",
+      "cobertura_pct": "50%",
+      "semanticas_presentes": [
+        "Valor Financeiro"
+      ],
+      "semanticas_ausentes": [
+        "Data / Calendário"
+      ],
+      "recomendacao": "Inclua colunas com semântica: Data / Calendário"
+    },
+    {
+      "kpi_id": "KPI_HR_004",
+      "kpi_nome": "Análise de Turnover",
+      "status": "❌ Bloqueado",
+      "cobertura_pct": "0%",
+      "semanticas_presentes": [],
+      "semanticas_ausentes": [
+        "Data / Calendário",
+        "Perfil do Colaborador"
+      ],
+      "recomendacao": "Inclua colunas com semântica: Data / Calendário, Perfil do Colaborador"
+    },
+    {
+      "kpi_id": "KPI_TREIN_001",
+      "kpi_nome": "Efetividade de Treinamentos",
+      "status": "❌ Bloqueado",
+      "cobertura_pct": "0%",
+      "semanticas_presentes": [],
+      "semanticas_ausentes": [
+        "Curso / Treinamento",
+        "Resultado de Avaliação"
+      ],
+      "recomendacao": "Inclua colunas com semântica: Curso / Treinamento, Resultado de Avaliação"
+    },
+    {
+      "kpi_id": "KPI_GEO_001",
+      "kpi_nome": "Distribuição Geográfica de Headcount",
+      "status": "✅ Habilitado",
+      "cobertura_pct": "100%",
+      "semanticas_presentes": [
+        "Estrutura Organizacional",
+        "Localização Geográfica"
+      ],
+      "semanticas_ausentes": [],
+      "recomendacao": "Tabela possui todos os requisitos para este KPI."
+    }
+  ],
+  "analise_temporal_series": []
+}

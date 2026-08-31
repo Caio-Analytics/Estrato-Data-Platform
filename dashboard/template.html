@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bateia</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --surface-2:      #f3f2ee;
+    --page-plane:      #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --gridline:       #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --success-text:   #006300;
+
+    --series-1: #2a78d6; /* blue */
+    --series-2: #eb6834; /* orange */
+    --series-3: #1baf7a; /* aqua */
+    --series-4: #eda100; /* yellow */
+    --series-5: #e87ba4; /* magenta */
+    --series-6: #008300; /* green */
+    --series-7: #4a3aa7; /* violet */
+    --series-8: #e34948; /* red */
+    --diverge-neg: #d03b3b;
+
+    --status-good: #0ca30c;
+    --status-warning: #fab219;
+    --status-critical: #d03b3b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --surface-2: #222221;
+      --page-plane: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --gridline: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255,255,255,0.10);
+      --success-text: #0ca30c;
+      --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70;
+      --series-4: #c98500; --series-5: #d55181; --series-6: #008300;
+      --series-7: #9085e9; --series-8: #e66767;
+      --diverge-neg: #e66767;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --surface-2: #222221;
+    --page-plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --gridline: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255,255,255,0.10);
+    --success-text: #0ca30c;
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70;
+    --series-4: #c98500; --series-5: #d55181; --series-6: #008300;
+    --series-7: #9085e9; --series-8: #e66767;
+    --diverge-neg: #e66767;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--page-plane);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  body { padding-bottom: 48px; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---- top bar ---- */
+  .topbar {
+    position: sticky; top: 0; z-index: 30;
+    background: color-mix(in srgb, var(--surface-1) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar-inner { max-width: 1280px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; gap: 20px; }
+  .wordmark { display: flex; align-items: baseline; gap: 9px; }
+  .wordmark .mark { font-size: 17px; font-weight: 700; letter-spacing: 0.02em; }
+  .wordmark .tagline { font-size: 11.5px; color: var(--text-muted); }
+  .section-nav { display: flex; gap: 4px; margin-left: 8px; }
+  .section-nav a {
+    font-size: 12.5px; color: var(--text-secondary); text-decoration: none;
+    padding: 6px 11px; border-radius: 7px;
+  }
+  .section-nav a:hover { background: var(--surface-2); color: var(--text-primary); }
+  .theme-toggle {
+    margin-left: auto;
+    border: 1px solid var(--border); background: var(--surface-1); color: var(--text-secondary);
+    border-radius: 8px; padding: 7px 12px; font-size: 12.5px; cursor: pointer; white-space: nowrap;
+  }
+  .theme-toggle:hover { color: var(--text-primary); }
+
+  /* ---- sections ---- */
+  section.view { padding-top: 28px; scroll-margin-top: 64px; }
+  section.view + section.view { border-top: 1px solid var(--border); margin-top: 32px; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .section-head .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin: 0 0 3px; }
+  .section-head h2 { font-size: 19px; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+  .section-head p.note { margin: 4px 0 0; font-size: 12.5px; color: var(--text-secondary); max-width: 68ch; }
+
+  /* ---- filters ---- */
+  .filters {
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 16px; margin-bottom: 18px;
+  }
+  .filter-group { display: flex; align-items: center; gap: 8px; }
+  .filter-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-right: 2px; }
+  select, input[type="text"] {
+    background: var(--page-plane); color: var(--text-primary); border: 1px solid var(--border);
+    border-radius: 7px; padding: 6px 9px; font-size: 13px; font-family: inherit;
+  }
+  .chip {
+    border: 1px solid var(--border); background: var(--page-plane); color: var(--text-secondary);
+    border-radius: 999px; padding: 5px 12px; font-size: 12.5px; cursor: pointer; user-select: none;
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+  }
+  .chip.active { background: var(--series-1); color: #fff; border-color: var(--series-1); }
+  .chip-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .reset-btn {
+    margin-left: auto; border: none; background: transparent; color: var(--text-muted);
+    font-size: 12.5px; cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
+  }
+  .reset-btn:hover { color: var(--text-primary); }
+
+  /* ---- kpis ---- */
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 18px; }
+  .kpi-tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .kpi-tile .label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+  .kpi-tile .value { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+  .kpi-tile .value small { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+
+  /* ---- grid & cards ---- */
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 18px 14px; position: relative;
+    box-shadow: 0 1px 2px rgba(11,11,11,0.03);
+  }
+  .card.wide { grid-column: 1 / -1; }
+  .card h3 { font-size: 14px; margin: 0 0 2px; font-weight: 600; }
+  .card p.note { margin: 0 0 10px; font-size: 12px; color: var(--text-muted); }
+  .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .table-toggle {
+    border: none; background: transparent; color: var(--text-muted); font-size: 11.5px;
+    cursor: pointer; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap;
+  }
+  .table-toggle:hover { color: var(--text-primary); }
+
+  svg.chart { width: 100%; height: auto; display: block; overflow: visible; }
+  svg.chart text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .axis-label { fill: var(--text-muted); font-size: 10.5px; }
+  .gridline { stroke: var(--gridline); stroke-width: 1; }
+  .baseline { stroke: var(--baseline); stroke-width: 1; }
+  .bar-label { fill: var(--text-secondary); font-size: 11px; }
+
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; font-size: 12px; color: var(--text-secondary); }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-swatch { width: 12px; height: 3px; border-radius: 2px; display: inline-block; }
+
+  .tooltip {
+    position: fixed; pointer-events: none; z-index: 50;
+    background: var(--text-primary); color: var(--surface-1);
+    font-size: 12px; padding: 7px 10px; border-radius: 7px; line-height: 1.45;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    opacity: 0; transform: translate(-9999px, -9999px);
+    max-width: 260px;
+  }
+  .tooltip .t-title { font-weight: 600; margin-bottom: 3px; }
+  .tooltip .t-row { display: flex; gap: 8px; justify-content: space-between; }
+  .tooltip .t-row .k { opacity: 0.75; }
+  .tooltip .t-row .v { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .tooltip .t-key { display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:5px; }
+
+  table.data-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  table.data-table th, table.data-table td {
+    text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--gridline);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  table.data-table th:first-child, table.data-table td:first-child { text-align: left; font-variant-numeric: normal; }
+  table.data-table th { color: var(--text-muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; }
+  .table-scroll { overflow-x: auto; }
+
+  .empty-msg { color: var(--text-muted); font-size: 13px; padding: 24px 0; text-align: center; }
+
+  footer.site { margin-top: 36px; color: var(--text-muted); font-size: 11.5px; text-align: center; }
+
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; }
+    .filters { flex-direction: column; align-items: stretch; }
+    .reset-btn { margin-left: 0; }
+    .section-nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="wordmark">
+      <span class="mark">BATEIA</span>
+      <span class="tagline">Inteligência de dados da mineração brasileira</span>
+    </div>
+    <nav class="section-nav">
+      <a href="#bruta">Produção Bruta</a>
+      <a href="#beneficiada">Produção Beneficiada</a>
+      <a href="#beneficiamento">Beneficiamento</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button">🌓 Tema</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ================= PRODUÇÃO BRUTA ================= -->
+  <section class="view" id="bruta">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Extração</p>
+        <h2>Produção Mineral Bruta no Brasil</h2>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">Ano</span>
+        <select id="bruta-anoFrom"></select>
+        <span style="color:var(--text-muted)">–</span>
+        <select id="bruta-anoTo"></select>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Região</span>
+        <div class="chip-row" id="bruta-regiaoChips"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Classe</span>
+        <div class="chip-row" id="bruta-classeChips"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Substância</span>
+        <input type="text" id="bruta-substanciaSearch" placeholder="buscar…" size="14" />
+      </div>
+      <button class="reset-btn" id="bruta-resetFilters" type="button">Limpar filtros</button>
+    </div>
+
+    <div class="kpi-row" id="bruta-kpiRow"></div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Produção bruta (minério ROM) por ano</h3>
+        <p class="note">Toneladas somadas por ano-base, no recorte filtrado</p>
+        <div id="bruta-chartProducao"></div>
+      </div>
+      <div class="card">
+        <h3>Valor de venda por ano</h3>
+        <p class="note">R$ somados por ano-base, no recorte filtrado</p>
+        <div id="bruta-chartValor"></div>
+      </div>
+      <div class="card">
+        <h3>Top substâncias por valor de venda</h3>
+        <p class="note">Somatório de R$ no período e recorte selecionados</p>
+        <div id="bruta-chartSubstancias"></div>
+      </div>
+      <div class="card">
+        <h3>Top estados (UF) por valor de venda</h3>
+        <p class="note">Somatório de R$ no período e recorte selecionados</p>
+        <div id="bruta-chartUf"></div>
+      </div>
+      <div class="card wide">
+        <div class="card-head">
+          <h3>Composição da destinação da produção, por ano</h3>
+          <button class="table-toggle" data-target="bruta-tableDestino" data-chart="bruta-chartDestino" type="button">Ver tabela</button>
+        </div>
+        <p class="note">Participação (%) por quantidade — venda, transformação/consumo e transferência</p>
+        <div id="bruta-chartDestino"></div>
+        <div class="legend" id="bruta-legendDestino"></div>
+        <div id="bruta-tableDestino" class="table-scroll" style="display:none; margin-top:10px;"></div>
+      </div>
+      <div class="card">
+        <h3>Produção por classe de substância</h3>
+        <p class="note">Valor de venda somado, por classe</p>
+        <div id="bruta-chartClasse"></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Série anual detalhada</h3>
+          <button class="table-toggle" data-target="bruta-tableSerie" type="button">Ocultar tabela</button>
+        </div>
+        <p class="note">Produção, valores e crescimento YoY no recorte filtrado</p>
+        <div id="bruta-tableSerie" class="table-scroll"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRODUÇÃO BENEFICIADA ================= -->
+  <section class="view" id="beneficiada">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Processamento</p>
+        <h2>Produção Mineral Beneficiada no Brasil</h2>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">Ano</span>
+        <select id="ben-anoFrom"></select>
+        <span style="color:var(--text-muted)">–</span>
+        <select id="ben-anoTo"></select>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Região</span>
+        <div class="chip-row" id="ben-regiaoChips"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Classe</span>
+        <div class="chip-row" id="ben-classeChips"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Substância</span>
+        <input type="text" id="ben-substanciaSearch" placeholder="buscar…" size="14" />
+      </div>
+      <button class="reset-btn" id="ben-resetFilters" type="button">Limpar filtros</button>
+    </div>
+
+    <div class="kpi-row" id="ben-kpiRow"></div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Valor de venda por ano</h3>
+        <p class="note">R$ somados por ano-base, no recorte filtrado</p>
+        <div id="ben-chartValor"></div>
+      </div>
+      <div class="card">
+        <h3>Valor movimentado total por ano</h3>
+        <p class="note">Venda + consumo na usina + transferência (R$)</p>
+        <div id="ben-chartMovimentado"></div>
+      </div>
+      <div class="card">
+        <h3>Top substâncias por valor de venda</h3>
+        <p class="note">Somatório de R$ no período e recorte selecionados</p>
+        <div id="ben-chartSubstancias"></div>
+      </div>
+      <div class="card">
+        <h3>Top estados (UF) por valor de venda</h3>
+        <p class="note">Somatório de R$ no período e recorte selecionados</p>
+        <div id="ben-chartUf"></div>
+      </div>
+      <div class="card wide">
+        <div class="card-head">
+          <h3>Composição da destinação, por ano</h3>
+          <button class="table-toggle" data-target="ben-tableDestino" data-chart="ben-chartDestino" type="button">Ver tabela</button>
+        </div>
+        <p class="note">Participação (%) por valor (R$) — quantidades não somadas por virem em unidades distintas (t/kg/ct)</p>
+        <div id="ben-chartDestino"></div>
+        <div class="legend" id="ben-legendDestino"></div>
+        <div id="ben-tableDestino" class="table-scroll" style="display:none; margin-top:10px;"></div>
+      </div>
+      <div class="card">
+        <h3>Produção por classe de substância</h3>
+        <p class="note">Valor de venda somado, por classe</p>
+        <div id="ben-chartClasse"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BENEFICIAMENTO (CRUZAMENTO) ================= -->
+  <section class="view" id="beneficiamento">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Cruzamento Bruta × Beneficiada</p>
+        <h2>Quanto valor o beneficiamento agrega</h2>
+        <p class="note">Valor de venda declarado como beneficiada menos o declarado como bruta, por substância (R$, 2010–2025). Comparação por valor — a única métrica comum às duas bases — e limitada a substâncias com pelo menos 5 registros de cada lado.</p>
+      </div>
+    </div>
+
+    <div class="kpi-row" id="cruz-kpiRow"></div>
+
+    <div class="grid">
+      <div class="card wide">
+        <h3>Valor agregado por substância</h3>
+        <p class="note">Valor de venda (beneficiada − bruta); azul = agrega valor ao beneficiar, vermelho = mais valor é capturado já na venda bruta</p>
+        <div id="cruz-chartAgregado"></div>
+      </div>
+      <div class="card wide">
+        <h3>Valor de venda nacional — bruta vs. beneficiada, por ano</h3>
+        <p class="note">Totais nacionais de cada base, não restritos às substâncias comparáveis acima</p>
+        <div id="cruz-chartAnual"></div>
+        <div class="legend" id="cruz-legendAnual"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site">
+    Fonte dos dados: Relatório Anual de Lavra (RAL) — ANM
+  </footer>
+
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const DATA = __DATA_JSON__;
+</script>
+<script>
+__APP_JS__
+</script>
+</body>
+</html>
