@@ -68,18 +68,7 @@ No PowerShell, ative o ambiente com `.venv\Scripts\Activate.ps1`.
 
 ## Arquitetura
 
-```mermaid
-flowchart TD
-    RB[CSV Produção Bruta] --> BB[bronze_bruta]
-    RF[CSV Produção Beneficiada] --> BF[bronze_beneficiada]
-    BB --> SB[silver_bruta] --> GB[gold_bruta]
-    BF --> SF[silver_beneficiada] --> GF[gold_beneficiada]
-    GB --> C[Cruzamento DuckDB]
-    GF --> C
-    C --> Q{Há substâncias comparáveis?}
-    Q -->|Sim| D[Dashboard HTML]
-    Q -->|Não| E[Check falha e bloqueia o dashboard]
-```
+![Arquitetura: as duas fontes passam por Bronze, Silver e Gold, convergem no cruzamento DuckDB e só geram o dashboard se o check de qualidade passar.](docs/architecture.svg)
 
 As duas fontes têm cadeias independentes até o cruzamento. O diagrama representa dependências; a concorrência efetiva depende do executor. Cada asset chama a transformação correspondente de `etl/` ou `dashboard/`, mantendo as regras de dados separadas da orquestração.
 
