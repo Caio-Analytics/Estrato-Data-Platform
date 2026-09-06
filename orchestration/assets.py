@@ -1,7 +1,7 @@
-"""Dagster assets wrapping the Bateia pipeline: bronze -> silver -> gold ->
+"""Dagster assets wrapping the Estrato pipeline: bronze -> silver -> gold ->
 cross-reference -> dashboard.
 
-Transform logic lives in etl/ and dashboard/, unchanged from Bateia. Each
+Transform logic lives in etl/ and dashboard/, unchanged from Estrato. Each
 asset here is a thin call into that file-based pipeline (parquet in,
 parquet out via etl.config paths) — Dagster just adds dependencies,
 retries, and lineage on top.
@@ -87,7 +87,7 @@ def cross_reference_asset() -> dg.MaterializeResult:
     return dg.MaterializeResult(metadata={k: dg.MetadataValue.int(v) for k, v in resumo.items() if isinstance(v, int)})
 
 
-@dg.asset_check(asset=cross_reference_asset)
+@dg.asset_check(asset=cross_reference_asset, blocking=True)
 def cross_reference_has_comparable_substances() -> dg.AssetCheckResult:
     """Fails if the join finds zero comparable substances (e.g. a
     substance-name mismatch upstream)."""

@@ -1,107 +1,113 @@
-# Bateia Ops
+# Estrato Data Platform
 
-[![ci](https://github.com/Caio-Analytics/bateia-ops/actions/workflows/ci.yml/badge.svg)](https://github.com/Caio-Analytics/bateia-ops/actions/workflows/ci.yml)
+Pipeline de dados da mineração brasileira com Dagster, Docker e validação de qualidade antes da geração do dashboard.
 
-Reprodutibilidade (Docker) e orquestração (Dagster) para o pipeline de dados
-do [Bateia](https://github.com/Caio-Analytics/bateia) — o mesmo ETL em
-camadas sobre dados da mineração brasileira (ANM/RAL), agora rodando como um
-grafo de assets com lineage, retries, checks de qualidade e schedule, em vez
-de um script chamado na mão.
+[![CI](https://github.com/Caio-Analytics/Estrato-Data-Platform/actions/workflows/ci.yml/badge.svg)](https://github.com/Caio-Analytics/Estrato-Data-Platform/actions/workflows/ci.yml)
+[![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](requirements.txt)
+[![Licença MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-64748b)](LICENSE)
 
-![Grafo de assets no Dagster](docs/screenshots/dagster_lineage.png)
+[Execução local](#execute-localmente) · [Arquitetura](#arquitetura) · [Decisões técnicas](#decisões-técnicas) · [Testes](#validação)
 
-## Por que este repo existe
+Desenvolvi este projeto para demonstrar como organizo a execução de um pipeline analítico: dependências explícitas, acompanhamento por etapa e critérios de qualidade para entregar o resultado. Os dados são de Produção Bruta e Produção Beneficiada do Relatório Anual de Lavra (ANM/RAL).
 
-O [Bateia](https://github.com/Caio-Analytics/bateia) prova que o pipeline
-funciona: ingestão de CSV governamental sujo, camadas Bronze/Silver/Gold,
-cruzamento via SQL, testes, CI, dashboard. O que ele não prova é que esse
-pipeline sobrevive fora do notebook de quem escreveu — que ele roda igual em
-qualquer máquina, que uma etapa falhando não derruba o resto silenciosamente,
-e que dá pra ver o lineage entre as camadas sem ler o código.
+O ETL deriva do projeto hoje chamado [Estrato Panorama Mineral Brasileiro](https://github.com/Caio-Analytics/Estrato-Panorama-Mineral-Brasileiro), anteriormente Bateia. Esta versão concentra o trabalho de orquestração em Dagster e execução em Docker, sobre as transformações Python presentes neste repositório.
 
-Este repo pega o mesmo ETL (código inalterado, importado de `etl/` e
-`dashboard/`) e adiciona só isso:
+## Veja a execução
 
-- **Docker Compose** — `docker compose up` sobe tudo, sem instalar Python,
-  Polars, DuckDB ou nada localmente.
-- **Dagster** — cada estágio (Bronze, Silver, Gold, Cruzamento, Dashboard)
-  vira um [software-defined asset](https://docs.dagster.io/concepts/assets/software-defined-assets),
-  com retry automático, metadata (linhas processadas, preview, tamanho do
-  artefato final) e um **asset check** que barra o pipeline se o cruzamento
-  Bruta × Beneficiada degenerar para zero substâncias comparáveis.
+![Captura do Dagster com duas fontes passando por Bronze, Silver e Gold até o cruzamento e o dashboard.](docs/screenshots/dagster_lineage.png)
 
-## Quickstart
+O Dagster mostra as dependências e o histórico das execuções. Bronze e Silver registram quantidade de linhas, colunas e uma amostra; Gold registra os artefatos gerados. O último asset entrega um dashboard HTML que abre direto no navegador.
+
+## O que você pode avaliar aqui
+
+| Competência | Implementação | Onde conferir |
+|---|---|---|
+| Engenharia de dados | CSV → Parquet → agregações, com separação Bronze/Silver/Gold | [`etl/`](etl/) |
+| Orquestração | Oito assets, dependências explícitas e até duas retentativas por asset | [`orchestration/assets.py`](orchestration/assets.py) |
+| Qualidade em execução | Check bloqueia o dashboard se o cruzamento não encontrar substâncias comparáveis | [`tests/test_orchestration.py`](tests/test_orchestration.py) |
+| SQL analítico | Cruzamento das bases com DuckDB e critérios mínimos de comparação | [`etl/cross_reference.py`](etl/cross_reference.py) |
+| Ambiente e integração contínua | Docker Compose, testes, materialização completa e build da imagem no CI | [Workflow](.github/workflows/ci.yml) |
+| Entrega para análise | Dashboard em um único HTML com dados incorporados | [`dashboard/`](dashboard/) |
+
+## Execute localmente
+
+Com Docker e Docker Compose instalados, clone o projeto e inicie o serviço:
 
 ```bash
+git clone https://github.com/Caio-Analytics/Estrato-Data-Platform.git
+cd Estrato-Data-Platform
 docker compose up --build
 ```
 
-Depois abra [`localhost:3000`](http://localhost:3000), vá em **Lineage** e
-clique em **Materialize all**. O grafo materializa na ordem correta
-(Bronze → Silver → Gold → Cruzamento → Dashboard) e o dashboard final sai em
-`output/dashboard.html`, no volume montado — não precisa entrar no
-container pra pegar o arquivo.
+1. Abra [localhost:3000](http://localhost:3000).
+2. No grafo de assets, clique em **Materialize all**.
+3. Após a execução concluir, abra `output/dashboard.html` no navegador.
 
-## O grafo de assets
+Os CSVs usados na demonstração já estão em [`data/raw/`](data/raw/). As camadas geradas ficam em `data/` e o dashboard em `output/`, ambos montados no host. O histórico do Dagster fica em um volume Docker nomeado e é preservado ao recriar o container. `docker compose down -v` remove esse histórico.
 
-```
-bronze_bruta ──┐
-               ├──▶ silver_bruta ──┐
-bronze_beneficiada ┘               ├──▶ silver_beneficiada ──┐
-                                                               │
-        gold_bruta ◀── silver_bruta                           │
-        gold_beneficiada ◀── silver_beneficiada                │
-                    │                                          │
-                    └──▶ cross_reference_asset ──▶ dashboard_asset
-                              │
-                              └──▶ [check] cross_reference_has_comparable_substances
-```
+<details>
+<summary>Executar com Python, sem Docker</summary>
 
-(veja o grafo real, já materializado, no screenshot acima — a ordem lógica é
-a mesma: as duas fontes sobem em paralelo por Bronze → Silver → Gold, se
-encontram no cruzamento SQL via DuckDB, e terminam no dashboard.)
-
-Cada asset em `orchestration/assets.py` é uma chamada fina para a função de
-transformação já existente em `etl/` — o valor do Dagster aqui é orquestração
-(dependências, retry, observabilidade), não reescrever a lógica em memória.
-
-## O que muda em relação ao Bateia
-
-| | Bateia | Bateia Ops |
-|---|---|---|
-| Execução | `python -m etl.pipeline` | `dagster dev` ou `dagster asset materialize` |
-| Falha parcial | pipeline inteiro para | asset falho é isolado, retry automático (2x) |
-| Observabilidade | logs no console | UI com lineage, metadata por asset, histórico de runs |
-| Qualidade de dado | validado só em testes | `asset_check` roda a cada materialização |
-| Ambiente | requer Python + libs instaladas | `docker compose up` |
-| Agendamento | nenhum | `ScheduleDefinition` diário (desativado por padrão) |
-
-## Rodando sem Docker
+Use Python 3.12, a mesma versão do CI e da imagem Docker.
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 
-# testes herdados do Bateia (29 casos, cobrindo bronze/silver/gold/cruzamento)
-python -m pytest tests/ -v
-
-# materializar tudo via CLI, sem subir a UI
+# Materializar o grafo sem abrir a interface
 dagster asset materialize -m orchestration.definitions --select "*"
 
-# ou com a UI (lineage, runs, schedules)
+# Abrir a interface
 dagster dev -m orchestration.definitions
 ```
 
-## Stack
+No PowerShell, ative o ambiente com `.venv\Scripts\Activate.ps1`.
 
-Python · Polars · pandas · DuckDB · PyArrow/Parquet · **Dagster** ·
-**Docker / Docker Compose** · pytest · GitHub Actions (CI roda os testes, um
-smoke test materializando o grafo inteiro, e o build da imagem Docker).
+</details>
 
-## Dados
+## Arquitetura
 
-Mesma fonte do Bateia: Relatório Anual de Lavra (RAL), publicado pela ANM
-(Agência Nacional de Mineração) — dados públicos, ~10.300 registros,
-2010–2025. Detalhes sobre as duas bases (Produção Bruta e Produção
-Beneficiada) e as inconsistências que o pipeline trata estão documentados no
-[README do Bateia](https://github.com/Caio-Analytics/bateia#as-bases).
+```mermaid
+flowchart TD
+    RB[CSV Produção Bruta] --> BB[bronze_bruta]
+    RF[CSV Produção Beneficiada] --> BF[bronze_beneficiada]
+    BB --> SB[silver_bruta] --> GB[gold_bruta]
+    BF --> SF[silver_beneficiada] --> GF[gold_beneficiada]
+    GB --> C[Cruzamento DuckDB]
+    GF --> C
+    C --> Q{Há substâncias comparáveis?}
+    Q -->|Sim| D[Dashboard HTML]
+    Q -->|Não| E[Check falha e bloqueia o dashboard]
+```
+
+As duas fontes têm cadeias independentes até o cruzamento. O diagrama representa dependências; a concorrência efetiva depende do executor. Cada asset chama a transformação correspondente de `etl/` ou `dashboard/`, mantendo as regras de dados separadas da orquestração.
+
+## Decisões técnicas
+
+- **Qualidade antes da entrega.** O check usa a contagem de substâncias comparáveis produzida pelo cruzamento. Zero comparáveis causa falha e impede a execução do dashboard naquele run. Os testes simulam tanto a falha quanto a liberação da etapa final.
+- **Cuidado com as unidades.** Produção Beneficiada contém quantidades em unidades diferentes. As agregações gerais usam valores monetários para evitar somas de quantidades incompatíveis. Essa regra está explícita em [`DatasetSpec`](etl/config.py) e nas transformações.
+- **Retentativas limitadas.** Cada asset tem até duas retentativas, com intervalo de cinco segundos. Isso permite repetir uma etapa após uma falha transitória; dependentes de uma etapa que continua falhando não avançam.
+- **Histórico persistente.** Um volume mantém os eventos e as execuções do Dagster entre recriações do container, permitindo investigar o que ocorreu em cada run.
+
+Há um agendamento diário configurado para `06:00 UTC`, desativado por padrão. Ele demonstra a configuração de schedules; os arquivos de entrada são um recorte estático e não há coleta automática de novas publicações da ANM.
+
+## Validação
+
+```bash
+python -m pytest tests/ -v
+```
+
+A suíte cobre conversão de decimais brasileiros, schema, preservação de registros, UFs, agregações e regras do cruzamento. Os testes de orquestração usam dados sintéticos e o motor de execução do Dagster para verificar que um check reprovado impede a etapa seguinte.
+
+A cada push na `main` ou pull request, o [GitHub Actions](https://github.com/Caio-Analytics/Estrato-Data-Platform/actions/workflows/ci.yml) executa a suíte, materializa o grafo completo e faz o build Docker. O HTML gerado fica disponível como artefato `dashboard` na execução do CI.
+
+## Escopo e limites
+
+Este é um projeto de portfólio executável localmente. As dependências têm versões mínimas, sem lockfile; Docker padroniza a configuração do ambiente, mas os builds podem resolver versões diferentes ao longo do tempo. Os arquivos das camadas usam caminhos fixos, portanto o projeto pressupõe uma execução por vez. O check bloqueia uma nova geração do dashboard, mas não apaga um HTML de execução anterior.
+
+O cruzamento compara valores agregados entre bases. A diferença chamada `valor_agregado` no código não representa lucro ou margem de uma operação. A fonte, as unidades e o recorte precisam ser considerados na interpretação dos resultados.
+
+Python · Polars · pandas · DuckDB · Parquet · Dagster · Docker Compose · pytest · GitHub Actions
+
+Projeto de [Caio Leão](https://github.com/Caio-Analytics). Licença [MIT](LICENSE).
